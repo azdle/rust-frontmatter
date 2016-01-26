@@ -6,28 +6,16 @@ mod frontmatter {
     use yaml_rust::scanner::ScanError;
 
     pub fn parse(text: &str) -> Result<Option<Yaml>, ScanError> {
-        println!("Parse Test: {}", text);
         match text.starts_with("---\n") {
             true => {
-                println!("Starts with marker");
-
                 let slice_after_marker = &text[4..];
                 let fm_end = slice_after_marker.find("---");
-
-                println!("{:?}", fm_end);
-
                 if fm_end.is_none() {
                     return Ok(None)
                 };
 
                 let fm_end = fm_end.unwrap();
-
-                println!("{:?}", fm_end);
-
                 let yaml_str = &text[4..4+fm_end];
-
-                println!("{:?}", yaml_str);
-
                 let mut documents = try!(YamlLoader::load_from_str(yaml_str));
 
                 Ok(documents.pop())
