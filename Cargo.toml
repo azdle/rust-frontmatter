@@ -1,6 +1,6 @@
 [package]
 name = "frontmatter"
-version = "0.1.1"
+version = "0.2.0"
 description = "A Fairly Trivial Wrapper for yaml-rust to Extract Frontmatter from a String Slice"
 authors = ["Patrick Barrett <patrick@mkii.org>"]
 repository = "https://github.com/azdle/rust-frontmatter"
