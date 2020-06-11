@@ -1,7 +1,9 @@
 #![allow(dead_code)]
 extern crate yaml_rust;
 
-use yaml_rust::{Yaml, YamlLoader};
+pub use yaml_rust::Yaml;
+
+use yaml_rust::YamlLoader;
 use yaml_rust::scanner::ScanError;
 
 fn find_yaml_block(text: &str) -> Option<(usize, usize, usize)> {
