@@ -10,12 +10,7 @@ fn find_yaml_block(text: &str) -> Option<(usize, usize, usize)> {
     match text.starts_with("---\n") {
         true => {
             let slice_after_marker = &text[4..];
-            let fm_end = slice_after_marker.find("---\n");
-            if fm_end.is_none() {
-                return None;
-            };
-
-            let fm_end = fm_end.unwrap();
+            let fm_end = slice_after_marker.find("---\n")?;
             Some((4, fm_end + 4, fm_end + 2 * 4))
         }
         false => None,
