@@ -3,8 +3,8 @@ extern crate yaml_rust;
 
 pub use yaml_rust::Yaml;
 
-use yaml_rust::YamlLoader;
 use yaml_rust::scanner::ScanError;
+use yaml_rust::YamlLoader;
 
 fn find_yaml_block(text: &str) -> Option<(usize, usize, usize)> {
     match text.starts_with("---\n") {
@@ -12,13 +12,13 @@ fn find_yaml_block(text: &str) -> Option<(usize, usize, usize)> {
             let slice_after_marker = &text[4..];
             let fm_end = slice_after_marker.find("---\n");
             if fm_end.is_none() {
-                return None
+                return None;
             };
 
             let fm_end = fm_end.unwrap();
-            Some((4,fm_end+4, fm_end+2*4))
-        },
-        false => None
+            Some((4, fm_end + 4, fm_end + 2 * 4))
+        }
+        false => None,
     }
 }
 
@@ -31,8 +31,8 @@ pub fn parse_and_find_content(text: &str) -> Result<(Option<Yaml>, &str), ScanEr
             let rest_of_text = &text[content_start..];
 
             Ok((documents.pop(), rest_of_text))
-        },
-        None => Ok((None, text))
+        }
+        None => Ok((None, text)),
     }
 }
 
@@ -95,9 +95,7 @@ fn test_none_find_content() {
     println!("Matter: {:?}", matter);
     assert!(matter.is_none());
     assert!(stripped_string.to_string() == test_string);
-
 }
-
 
 #[test]
 fn test_empty() {
@@ -123,11 +121,9 @@ fn test_empty_find_content() {
     println!("Matter: {:?}", matter);
     assert!(matter.is_none());
     assert!(stripped_string.to_string() == test_string[8..]);
-
 }
-
 
 #[test]
 fn test_tests() {
-    assert_eq!(2+2, 4);
+    assert_eq!(2 + 2, 4);
 }
