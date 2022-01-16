@@ -43,49 +43,48 @@ jobs:
         with:
           command: test
 
-  # Maybe enable these later
-  # fmt:
-  #   name: Rustfmt
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     matrix:
-  #       rust-version: [stable, beta, nightly]
-  #   steps:
-  #     - name: Checkout Code
-  #       uses: actions/checkout@v2
-  #     - name: Install Rust
-  #       uses: actions-rs/toolchain@v1
-  #       with:
-  #         profile: minimal
-  #         toolchain: ${{ matrix.rust-version }}
-  #         override: true
-  #     - name: Install rustfmt
-  #       run: rustup component add rustfmt
-  #     - name: Run rustfmt
-  #       uses: actions-rs/cargo@v1
-  #       with:
-  #         command: fmt
-  #         args: --all -- --check
+  fmt:
+    name: Rustfmt
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        rust-version: [stable, beta, nightly]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: ${{ matrix.rust-version }}
+          override: true
+      - name: Install rustfmt
+        run: rustup component add rustfmt
+      - name: Run rustfmt
+        uses: actions-rs/cargo@v1
+        with:
+          command: fmt
+          args: --all -- --check
 
-  # clippy:
-  #   name: Clippy
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     matrix:
-  #       rust-version: [stable, beta, nightly]
-  #   steps:
-  #     - name: Checkout Code
-  #       uses: actions/checkout@v2
-  #     - name: Install Rust
-  #       uses: actions-rs/toolchain@v1
-  #       with:
-  #         profile: minimal
-  #         toolchain: ${{ matrix.rust-version }}
-  #         override: true
-  #     - name: Install Clippy
-  #       run: rustup component add clippy
-  #     - name: Run Clippy
-  #       uses: actions-rs/cargo@v1
-  #       with:
-  #         command: clippy
-  #         args: -- -D warnings
+  clippy:
+    name: Clippy
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        rust-version: [stable, beta, nightly]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: ${{ matrix.rust-version }}
+          override: true
+      - name: Install Clippy
+        run: rustup component add clippy
+      - name: Run Clippy
+        uses: actions-rs/cargo@v1
+        with:
+          command: clippy
+          args: -- -D warnings
